@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const companiesController = require('../app/controllers/CompaniesController');
-router.use('/:slug', companiesController.show);
-router.use('/', companiesController.index);
+router.get('/create', companiesController.create);
+router.post('/store', companiesController.store);
+router.get('/:slug', companiesController.show);
+router.get('/', companiesController.index);
 
 module.exports = router;

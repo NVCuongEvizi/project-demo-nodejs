@@ -1,2 +1,24 @@
-<h1>Companies pages</h1>
-<p>Today I am creating project demo nodejs</p>
+<div class="companies-container">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Address</th>
+        <th scope="col">Website</th>
+        <th scope="col">Logo</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each companies}}
+        <tr>
+          <th scope="row"><a href="/companies/{{this.slug}}">{{this._id}}</a></th>
+          <td>{{this.name}}</td>
+          <td>{{this.address}}</td>
+          <td>{{this.website}}</td>
+          <td><img src={{this.logo}} alt={{this.name}}></td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>

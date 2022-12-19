@@ -8,3 +8,18 @@ a {
 a:hover {
   color: inherit;
 }
+
+.companies-container {
+  margin-top: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  table {
+    margin-bottom: 0px;
+    tbody {
+      img {
+        width: 40px;
+        border-radius: 4px;
+      }
+    }
+  }
+}
