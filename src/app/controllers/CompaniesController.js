@@ -64,8 +64,19 @@ class CompaniesController {
       next(err);
     })
   }
-  // [GET] /:id/delete
+  // [DELETE] /:id/delete
   delete(req, res, next) {
+    Company.deleteOne({ _id: req.params.id })
+    .then(() => res.redirect('/companies'))
+    .catch(next)
+  }
+  // [SEARCH] /:id/search
+  search(req, res, next) {
+    Company.find({ name: req.query.q })
+    .then((companies) => res.render('companies/companies', { 
+      companies: multipleMongooseToObject(companies)
+    }))
+    .catch(next)
   }
 }
 

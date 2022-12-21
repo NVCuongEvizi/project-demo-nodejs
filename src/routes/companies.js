@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const companiesController = require('../app/controllers/CompaniesController');
+router.search('/search', companiesController.search);
+router.delete('/:id/delete', companiesController.delete);
 router.put('/:id/update', companiesController.update);
 router.get('/:id/edit', companiesController.edit);
 router.get('/:id/delete', companiesController.delete);

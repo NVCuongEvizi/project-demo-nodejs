@@ -22,10 +22,57 @@
           <td><img src={{this.logo}} alt={{this.name}}></td>
           <td>
             <a class="btn btn-primary" href="/companies/{{this._id}}/edit">Update</a>
-            <a class="btn btn-danger ms-2" href="/companies/{{this._id}}/delete">Delete</a>
+            <a 
+              class="btn btn-danger ms-2" 
+              {{!-- href="/companies/{{this._id}}/delete" --}}
+              href="#"
+              data-bs-toggle="modal"
+              data-bs-target="#companies-modal"
+              data-bs-id={{this._id}}
+            >Delete</a>
           </td>
         </tr>
       {{/each}}
     </tbody>
   </table>
 </div>
+
+{{!-- Confirm modal --}}
+<div class="modal fade" id="companies-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger" id="exampleModalLabel">Confirm</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        This action can not return. Are you sure?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button id="delete-btn" type="button" class="btn btn-danger">Confirm delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- DELETE HIDDEN FORM --}}
+<form name="delete-form" method="POST"></form>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    let companyId;
+    const deleteBtn = document.getElementById('delete-btn');
+    {{!-- get form by name --}}
+    const deleteForm = document.forms['delete-form']
+    const myModalEl = document.getElementById('companies-modal');
+    myModalEl.addEventListener('show.bs.modal', function (event) {
+      const button = event.relatedTarget;
+      companyId = button.getAttribute('data-bs-id');
+    })
+    deleteBtn.onclick = function () {
+      deleteForm.action = `/companies/${companyId}/delete?_method=DELETE`;
+      deleteForm.submit();
+    }
+  })
+</script>
