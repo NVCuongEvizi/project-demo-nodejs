@@ -70,10 +70,11 @@ class CompaniesController {
     .then(() => res.redirect('/companies'))
     .catch(next)
   }
-  // [SEARCH] /:id/search
+  // [GET] /:id/search
   search(req, res, next) {
+    console.log('query', req.query)
     Company.find({ name: req.query.q })
-    .then((companies) => res.render('companies/companies', { 
+    .then((companies) => res.redirect('/companies', { 
       companies: multipleMongooseToObject(companies)
     }))
     .catch(next)
